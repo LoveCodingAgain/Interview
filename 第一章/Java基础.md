@@ -9,28 +9,16 @@
 ## 1.2
   8种基本类型如下:
   
-  |  基本类型   | 类型  |  所占字节 |
-  |  ----  | ----  | ---- |
-  | byte   | 数值型 | 1字节 |
-  | short  | 数值型 | 2字节 |
-  | int  | 数值型 | 4字节 |
-  | long | 数值型 | 8字节 |
-  | float | 数值型 | 4字节 |
-  | double | 数值型 | 8字节 |
-  | boolean| 布尔型 | 1bit |
-  | char| 字符型 | 2字节 |
-  其对应包装类型如下:
-
-|  基本类型   | 包装类型  |
-|  ----  | ----  |
-| byte   | Byte |
-| short  | Short |
-| int  | Integer|
-| long | Long |
-| float | float |
-| double | Double|
-| boolean| Boolean|
-| char| Character |
+  |  基本类型   | 类型  |  所占字节 | 包装类型 | 
+  |  ----  | ----  | ---- | ---- |
+  | byte   | 数值型 | 1字节 | Byte |
+  | short  | 数值型 | 2字节 | Short |
+  | int  | 数值型 | 4字节 | Integer |
+  | long | 数值型 | 8字节 | Long |
+  | float | 数值型 | 4字节 | Float |
+  | double | 数值型 | 8字节 | Double |
+  | boolean| 布尔型 | 1bit | Boolean |
+  | char| 字符型 | 2字节 | Character |
 
  装箱:将基本类型转换成包装类的过程.拆箱:将包装类转换成基本类型的过程.JDK5提供的自动拆装箱
   
