@@ -1,7 +1,6 @@
 ## 常用Git命令总结
 
 - git config --global user-name "你的名字" 让你全部的Git仓库绑定你的名字
-
 - git config --global user.email "你的邮箱" 让你全部的Git仓库绑定你的邮箱
 - git init 初始化你的仓库
 - git add . 把工作区的文件全部提交到暂存区

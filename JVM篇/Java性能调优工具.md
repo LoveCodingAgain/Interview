@@ -46,6 +46,14 @@ jstat -gcutil pid 1000 10
 > GCT：GC总耗时
 > JIT编译
 
+> 估算一个系统的运行期期间的信息
+> - 新生代对象的增长速率
+> - Young GC的频率和耗时
+> - 每次YoungGC后还有多少对象存活下来
+> - 每次YpuinGC有多少对象进入老年代
+> - 老年代对象的增长速率
+> - FullGC的频率和耗时
+
 四、 jmap
 > jmap导出堆内存快照，然后使用jhat来进行分析或者JProfiler来分析
 > jmap语法格式如下：
