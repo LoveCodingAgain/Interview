@@ -76,4 +76,4 @@ jstat -gcutil pid 1000 10
 - [L+类名 其他对象
 
 > 还有一个很常用的情况是：用jmap把进程内存使用情况dump到文件中，再用jhat分析查看。jmap进行dump命令格式如下:
-> jmap -dump:format=b,file=heapdump.hprof pid; format=b,表示以字节的形式
+> jmap -dump:format=b,file=heapdump.hprof pid; format=b,表示以字节的形式,然后使用JProfiler工具查看分析.
