@@ -36,8 +36,8 @@
 > - G1:同一新生代和老年代,堆分区为Region,提供垃圾回收可控暂停时间,更优秀的算法和执行机制.-XX:MaxGCPauseMillis.
 
 > JVM的参数配置
-- Tomcat独立部署的项目在catalina.sh中配置JVM参数以及GC日志.SpringBoot项目可以使用jar启动参数及脚本指定
-> - -Xms --jvm堆的最小值
+- Tomcat独立部署的项目在catalina.sh中配VM参数以及GC日志.SpringBoot项目可以使用jar启动参数及脚本指定
+> - -Xms --jvm堆的最小值置J
 > - -Xmx --jvm堆的最大值
 > - -XX:MaxNewSize  --新生代最大值
 > - -XX:MaxPermSize=1028m  --永久代最大值
