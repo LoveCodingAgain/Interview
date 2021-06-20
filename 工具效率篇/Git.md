@@ -1,5 +1,5 @@
 ## 常用Git命令总结
-
+### 1.1 Git命令
 - git config --global user-name "你的名字" 让你全部的Git仓库绑定你的名字
 - git config --global user.email "你的邮箱" 让你全部的Git仓库绑定你的邮箱
 - git init 初始化你的仓库
@@ -46,3 +46,6 @@
 - git config --global color-ui true 让Git显示颜色，会让命令输出看起来更醒目
 - git add -f <file> 强制提交已忽略的的文件
 - git check-ignore -v <file> 检查为什么Git会忽略该文件
+
+### 1.2 Git客户端工具使用
+- SourceTree
