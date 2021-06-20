@@ -80,4 +80,3 @@ update TableName set source_name ="where source_name" ="XXXX"
 update TbaleName set source_name= "XXX" ="YYY"
 select "XXX" ="YYY" 的值为0,更新数据直接回导致为0的,所以说线上更新时候要加limit
 ```
-
