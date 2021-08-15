@@ -163,3 +163,8 @@ public class BeanA implements InitializingBean {
 > 在这种情况中,如果找不到指定名字Bean的 Definition，就会抛出如下异常:
 > Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: 
   No bean named 'someBeanName' is defined
+
+## 1.3 web应用启动的顺序是：listener->filter->servlet.
+
+> 在Filter中注入Bean,启动过程报错.众所周知，springmvc的启动是在DisptachServlet里面做的，而它是在listener和filter之后执行。如果我们想在listener和filter里面@Autowired某个bean，肯定是不行的，因为filter初始化的时候，此时bean还没有初始化，无法自动装配.
+> 解决方法:答案是使用WebApplicationContextUtils.getWebApplicationContext获取当前的ApplicationContext,再通过它获取到bean实例.
