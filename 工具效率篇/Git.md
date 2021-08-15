@@ -11,8 +11,8 @@
 - git push -u origin <其他分支> 把其他分支提交到远程仓库
 - git status查看当前仓库的状态
 - git diff 查看文件修改的具体内容
-- git log 显示从最近到最远的提交历史
-- git clone + 仓库地址下载克隆文件
+- git log 显示从最近仓库地址下载克隆文件到最远的提交历史
+- git clone + 
 - git reset --hard + 版本号 回溯版本，版本号在commit的时候与master跟随在一起
 - git reflog 显示命令历史
 - git checkout -- <file> 撤销命令，用版本库里的文件替换掉工作区的文件。我觉得就像是Git世界的ctrl + z
