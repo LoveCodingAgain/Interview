@@ -168,3 +168,57 @@ public class BeanA implements InitializingBean {
 
 > 在Filter中注入Bean,启动过程报错.众所周知，springmvc的启动是在DisptachServlet里面做的，而它是在listener和filter之后执行。如果我们想在listener和filter里面@Autowired某个bean，肯定是不行的，因为filter初始化的时候，此时bean还没有初始化，无法自动装配.
 > 解决方法:答案是使用WebApplicationContextUtils.getWebApplicationContext获取当前的ApplicationContext,再通过它获取到bean实例.
+
+## 1.4 Spring的三级缓存机制
+
+```
+// 一级缓存Map 存放完整的Bean（流程跑完的）
+private final Map<String, Object> singletonObjects = new ConcurrentHashMap(256);
+
+// 二级缓存Map 存放不完整的Bean（只实例化完，还没属性赋值、初始化）
+private final Map<String, Object> earlySingletonObjects = new ConcurrentHashMap(16);
+
+// 三级缓存Map 存放一个Bean的lambda表达式（也是刚实例化完）
+private final Map<String, ObjectFactory<?>> singletonFactories = new HashMap(16);
+```
+
+从一级缓存获取，获取到了，则返回
+从二级缓存获取，获取到了，则返回
+从三级缓存获取，获取到了，则执行三级缓存中的lambda表达式，将结果放入二级缓存，清除三级缓存
+```
+protected Object getSingleton(String beanName, boolean allowEarlyReference) {
+    // 从一级缓存中获取Bean 获取到了则返回 没获取到继续
+    Object singletonObject = this.singletonObjects.get(beanName);
+    if (singletonObject == null && this.isSingletonCurrentlyInCreation(beanName)) {
+        // 从二级缓存中获取Bean  获取到了则返回 没获取到则继续
+        singletonObject = this.earlySingletonObjects.get(beanName);
+        if (singletonObject == null && allowEarlyReference) {
+            // 加一把锁防止 线程安全 双重获取校验
+            synchronized(this.singletonObjects) {
+                // 从一级缓存中获取Bean 获取到了则返回 没获取到继续
+                singletonObject = this.singletonObjects.get(beanName);
+                if (singletonObject == null) {
+                    // 从二级缓存中获取Bean  获取到了则返回 没获取到则继续
+                    singletonObject = this.earlySingletonObjects.get(beanName);
+                    if (singletonObject == null) {
+                        // 从三级缓存中获取 没获取到则返回
+                        ObjectFactory<?> singletonFactory = (ObjectFactory)this.singletonFactories.get(beanName);
+                        if (singletonFactory != null) {
+                            // 获取到了 执行三级缓存中的lambda表达式
+                            singletonObject = singletonFactory.getObject();
+                            // 并将结果放入二级缓存
+                            this.earlySingletonObjects.put(beanName, singletonObject);
+                            // 从三级缓存中移除
+                            this.singletonFactories.remove(beanName);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return singletonObject;
+}
+```
+实例化前，获取缓存判断（三个缓存中肯定没有A，获取为null，进入实例化流程）
+实例化完成，属性注入前（往三级缓存中放入了一个lambda表达式，一、二级为null）
+初始化完成（将A这个Bean放入一级缓存，清除二、三级缓存）
